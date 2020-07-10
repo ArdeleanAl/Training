@@ -16,12 +16,12 @@ namespace Training_1
     [Binding]
     public class TrainingSteps
     {
-        private readonly ITestOutputHelper scenario;
+        private readonly ITestOutputHelper scenario; //de obicei variabilele de aici le numesti cu _numeVariabila
         IWebDriver driver = new ChromeDriver();
         private int budget;
         string slide;
         string tempPhoneName;
-        int tempPhonePrice;
+        int tempPhonePrice;  // e.g. _tempPhonePrice
 
         public TrainingSteps(ITestOutputHelper sc)
         {
@@ -32,10 +32,10 @@ namespace Training_1
         [Given(@"I am on the homepage")]
         public void GivenIAmOnTheHomepage()
         {
-            driver.Navigate().GoToUrl("https://www.demoblaze.com/");
+            driver.Navigate().GoToUrl("https://www.demoblaze.com/"); // URL ul ii mai ok ca sa il pasezi ca si parametru
             driver.Manage().Window.Maximize();
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-            driver.FindElement(By.Id("nava")).Click();
+            driver.FindElement(By.Id("nava")).Click(); // Identificatorii la elemente se tin separat si nu se identifica acolo unde deja faci actiunea cu ea
 
             string title = driver.Title;
             Assert.Equal("STORE", title);
@@ -45,9 +45,9 @@ namespace Training_1
         [Given(@"I am logged in")]
         public void GivenIAmLoggedIn()
         {
-            Trace.WriteLine("we started");
+            Trace.WriteLine("we started");// de obicei dupa ce termini cu debugging ii ok sa scoti comentariile
             Debug.WriteLine("we started");
-            driver.Navigate().GoToUrl("https://www.demoblaze.com/");
+            driver.Navigate().GoToUrl("https://www.demoblaze.com/");//odata ce ai facut pasu de go to home, puteai refolosi pasul respectiv si aici sa ai doar partea de login
             driver.Manage().Window.Maximize();
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
             driver.FindElement(By.Id("nava")).Click();
@@ -71,7 +71,7 @@ namespace Training_1
         public void GivenIClickOnSignUpButton()
         {
             driver.FindElement(By.Id("signin2")).Click();
-            Thread.Sleep(500);
+            Thread.Sleep(500); //Pe cat se poate sa eviti sa folosesti thread sleep. Alternativa ar fi waint.until(conditie care ai nevoie (displayed/clickable/etc)
             string element = driver.FindElement(By.Id("signInModalLabel")).Text;
 
             Assert.Equal("Sign up", element);
@@ -81,8 +81,8 @@ namespace Training_1
         [Given(@"I select the first available product")]
         public void GivenISelectTheFirstAvailableProduct()
         {
-            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 30));
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("//*[@id=\"tbodyid\"]/div[1]/div/div/h4/a")));
+            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 30));//puteai sa declari wait intr-o clasa separata in care o mostenesti si nu trebuie sa o declari in fiecare metoda sau o pui la inceput cum ai pus si variabilele de la inceputul clasei
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("//*[@id=\"tbodyid\"]/div[1]/div/div/h4/a")));// xpathurile nu is cei mai buni identificatori deoarece la cea mai mica schimbare ele se pot schimba si devin invalide
             driver.FindElement(By.XPath("//*[@id=\"tbodyid\"]/div[1]/div/div/h4/a")).Click();
 
         }
@@ -502,7 +502,8 @@ namespace Training_1
 
 
         [Then(@"I can buy a phone, laptop and a monitor within the budget")]
-        public void ThenICanBuyAPhoneLaptopAndAMonitorWithinTheBudget()
+        public void ThenICanBuyAPhoneLaptopAndAMonitorWithinTheBudget() 
+	        // se poate simplifica un pic codul de aici incat sa fie mai usor de urmarit ce se intampla
         {
             int currentSum = 0;
             int i,j,k;
@@ -614,7 +615,8 @@ namespace Training_1
             Thread.Sleep(1500);
             Assert.Equal(p0, driver.FindElements(By.ClassName("success")).Count);
 
-            driver.Close();
+            driver.Close(); // de obicei inchiz driverul doar in after scenario
+
         }
 
         public void AddInCart(ref int p0)
