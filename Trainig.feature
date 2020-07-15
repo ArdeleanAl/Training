@@ -23,7 +23,7 @@ Scenario Outline: Get mean value product cost
 
 Scenario: Check that Image Slider change the content
 	Given I am on the homepage
-	When I click <Buttons> from Image Slider
+	When Image Slider <Button> button is clicked
 	Then I see a different product
 
 	Examples:

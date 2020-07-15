@@ -207,7 +207,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("I am on the homepage", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 26
- testRunner.When(string.Format("I click {0} from Image Slider", buttons), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("Image Slider <Button> button is clicked", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 27
  testRunner.Then("I see a different product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
