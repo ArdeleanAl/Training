@@ -475,7 +475,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("I am logged in", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 71
- testRunner.When("I filter by “Laptops”", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I filter by Laptops", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 72
  testRunner.And("I can add A DELL laptop from 2017", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -519,7 +519,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("I am logged in", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 77
- testRunner.When("I filter by “Laptops”", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I filter by Laptops", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 78
  testRunner.And("I can add A DELL laptop from 2017", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");

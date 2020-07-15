@@ -22,7 +22,7 @@ namespace Training_1.Steps
 
         public string GetModalTitleText()
         {
-            _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Id("signInModal"))).GetAttribute("ariaHidden").Equals(null);
+            _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Id("signInModal")));
             return _driver.FindElement(By.Id("signInModalLabel")).Text;
         }
 

@@ -68,13 +68,13 @@ Scenario: Check that the correct page/popup is displayed
 
 Scenario: Buy a Dell laptop model from 2017
 	Given I am logged in
-	When I filter by “Laptops”
+	When I filter by Laptops
 	And I can add A DELL laptop from 2017
 	Then I can Buy all from cart
 
 Scenario: Check Cart is empty after a complete Buy
 	Given I am logged in
-	When I filter by “Laptops”
+	When I filter by Laptops
 	And I can add A DELL laptop from 2017
 	Then I can Buy all from cart
 	And Cart is empty

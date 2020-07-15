@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
@@ -10,25 +11,27 @@ namespace Training_1.Steps
         private WebDriverWait _wait;
 
         private NavbarSteps _navbar;
-        private PopUpSteps _popup;
 
         public CartPageSteps(IWebDriver driver)
         {
             _driver = driver;
             _wait = new WebDriverWait(driver, new TimeSpan(0, 0, 30));
             _navbar = new NavbarSteps(driver);
-            _popup = new PopUpSteps(driver);
         }
 
         public bool WeAreOnCartPage()
         {
-            return _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.XPath("//*[contains(@data-target,'orderModal')]"))).Displayed;
+            return _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.XPath("//*[contains(@data-target,'orderModal')]"))).Text.Contains("Place Order");
+        }
+
+        public int AllProductsWereUpdated()
+        {
+            return _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.Id("totalp"))).Text.Length.CompareTo(0);
         }
 
         public int GetNumberOfProducts()
         {
-            while (WeAreOnCartPage() != true) ;
-
+            Thread.Sleep(750);
             return _driver.FindElements(By.ClassName("success")).Count;
         }
 
@@ -46,7 +49,7 @@ namespace Training_1.Steps
 
         public bool BuyAll()
         {
-            bool status = false;
+            bool status;
             IWebElement element;
 
             _navbar.ClickCart();
@@ -54,18 +57,18 @@ namespace Training_1.Steps
             CompleteAllFieldsNeeded("AlexG", "Romania", "Timisoasa", "4444-5555-6666-8777");
             ClickModalPurchase();
 
-            element = _driver.FindElement(By.XPath("//*[contains(class,'sweet-alert  showSweetAlert visible')]"));
+            element = _driver.FindElement(By.XPath("//*[contains(@class,'sweet-alert')]"));
             status = element.GetAttribute("innerText").ToLower().Contains("thank you for your purchase!");
-
             ClickSweetOK();
-
+            
             return status;
         }
 
         public void ClickPlaceOrder()
         {
+            _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.ClassName("success")));
             _driver.FindElement(By.XPath("//*[contains(@data-target,'orderModal')]")).Click();
-            _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Id("orderModal"))).GetAttribute("exampleModal").Equals(null);
+            _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Id("orderModal"))).GetAttribute("ariaHidden").Equals(null);
         }
 
         public void CompleteAllFieldsNeeded(string Name, string Country, string City, string cardNo)
@@ -81,13 +84,13 @@ namespace Training_1.Steps
         public void ClickModalPurchase()
         {
             _driver.FindElement(By.XPath("//*[contains(@onclick, 'purchaseOrder')]")).Click();
-            while (_wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.XPath("//*[contains(class,'sweet-alert  showSweetAlert visible')]"))).Displayed != true) ;
+            _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.ClassName("sa-placeholder")));
         }
 
         public void ClickSweetOK()
         {
+            Thread.Sleep(750);
             _driver.FindElement(By.XPath("//*[contains(@class,'confirm btn btn-lg btn-primary')]")).Click();
-            while (_wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.ClassName("sweet-overlay"))).Displayed) ;
         }
 
     }

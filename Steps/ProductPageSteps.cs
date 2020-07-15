@@ -16,7 +16,7 @@ namespace Training_1.Steps
         public ProductPageSteps(IWebDriver driver)
         {
             _driver = driver;
-            _wait = new WebDriverWait(driver, new TimeSpan(0, 0, 30));
+            _wait = new WebDriverWait(driver, new TimeSpan(0, 0, 5));
             _popup = new PopUpSteps(driver);
         }
 
@@ -29,7 +29,7 @@ namespace Training_1.Steps
 
         public void ClickAddToCartButton()
         {
-            _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("//*[contains(@onclick,'addToCart')]")));
+            _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("//*[contains(@onclick,'addToCart')]"))).Text.Equals("Add to cart");
             _driver.FindElement(By.XPath("//*[contains(@onclick,'addToCart')]")).Click();
 
         }
@@ -46,7 +46,14 @@ namespace Training_1.Steps
 
         public bool WeAreonProductPage()
         {
-            return _driver.FindElement(By.XPath("//*[contains(@onclick,'addToCart')")).Displayed;
+            try
+            {
+                return _driver.FindElement(By.XPath("//*[contains(@onclick,'addToCart')]")).Text.ToLower().Contains("add to cart");                
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

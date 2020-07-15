@@ -1,8 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Threading;
 
 namespace Training_1.Steps
 {
@@ -10,13 +9,14 @@ namespace Training_1.Steps
     {
         IWebDriver _driver;
         private WebDriverWait _wait;
-        private CartPageSteps _cartPage;
+        
+        //private CartPageSteps _cartPage;
 
         public NavbarSteps(IWebDriver driver)
         {
             _driver = driver; 
-            _wait = new WebDriverWait(driver, new TimeSpan(0, 0, 30));
-            _cartPage = new CartPageSteps(_driver);
+            _wait = new WebDriverWait(driver, new TimeSpan(0, 0, 5));
+            //_cartPage = new CartPageSteps(driver);
         }
 
         public void ClickHome()
@@ -27,23 +27,23 @@ namespace Training_1.Steps
 
         public void ClickContact()
         {
-            _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.Id("exampleModal")));
-            _driver.FindElement(By.Id("exampleModal")).Click();
-            _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Id("logInModal"))).GetAttribute("exampleModal").Equals(null);
+            _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("//*[contains(@data-target,'exampleModal')]")));
+            _driver.FindElement(By.XPath("//*[contains(@data-target,'exampleModal')]")).Click();
+            _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Id("logInModal"))).GetAttribute("ariaHidden").Equals(null);
         }
 
         public void ClickAboutUs()
         {
-            _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.Id("videoModal")));
-            _driver.FindElement(By.Id("videoModal")).Click();
-            _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Id("videoModal"))).GetAttribute("exampleModal").Equals(null);
+            _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("//*[contains(@data-target,'videoModal')]")));
+            _driver.FindElement(By.XPath("//*[contains(@data-target,'videoModal')]")).Click();
+            _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Id("videoModal"))).GetAttribute("ariaHidden").Equals(null);
         }
 
         public void ClickCart()
         {
             _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.Id("cartur")));
             _driver.FindElement(By.Id("cartur")).Click();
-            while (_cartPage.WeAreOnCartPage() != true) ;
+            while (new CartPageSteps(_driver).WeAreOnCartPage() != true) ;
         }
 
         public void ClickLogIn()
@@ -71,6 +71,7 @@ namespace Training_1.Steps
             _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.Id("signin2")));
             _driver.FindElement(By.Id("signin2")).Click();
             _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Id("signInModal"))).GetAttribute("ariaHidden").Equals(null);
+            _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("//*[contains(@onclick,'register')]")));
         }
 
 
