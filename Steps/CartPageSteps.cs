@@ -15,13 +15,13 @@ namespace Training_1.Steps
         public CartPageSteps(IWebDriver driver)
         {
             _driver = driver;
-            _wait = new WebDriverWait(driver, new TimeSpan(0, 0, 30));
+            _wait = new WebDriverWait(driver, new TimeSpan(0, 0, 5));
             _navbar = new NavbarSteps(driver);
         }
 
         public bool WeAreOnCartPage()
         {
-            return _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.XPath("//*[contains(@data-target,'orderModal')]"))).Text.Contains("Place Order");
+            return _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("//*[contains(@class,'btn btn-success')]"))).Text.Contains("Place Order");
         }
 
         public int AllProductsWereUpdated()
@@ -31,7 +31,7 @@ namespace Training_1.Steps
 
         public int GetNumberOfProducts()
         {
-            Thread.Sleep(750);
+            Thread.Sleep(350);
             return _driver.FindElements(By.ClassName("success")).Count;
         }
 
@@ -89,7 +89,7 @@ namespace Training_1.Steps
 
         public void ClickSweetOK()
         {
-            Thread.Sleep(750);
+            Thread.Sleep(500);
             _driver.FindElement(By.XPath("//*[contains(@class,'confirm btn btn-lg btn-primary')]")).Click();
         }
 

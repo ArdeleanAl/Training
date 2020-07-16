@@ -163,7 +163,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("I am on the homepage", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 15
- testRunner.When(string.Format("I filter by “{0}”", product), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When(string.Format("I filter by {0}", product), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 16
  testRunner.Then("I can see in the test output the mean value of each product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -207,7 +207,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("I am on the homepage", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 26
- testRunner.When("Image Slider <Button> button is clicked", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When(string.Format("Image Slider {0} button is clicked", buttons), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 27
  testRunner.Then("I see a different product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");

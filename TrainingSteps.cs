@@ -18,6 +18,7 @@ namespace Training_1
     public class TrainingSteps
     {
         IWebDriver _driver;
+        private WebDriverWait _wait;
 
         private readonly ITestOutputHelper _scenario; //de obicei variabilele de aici le numesti cu _numeVariabila           --> done
         private int _budget;
@@ -36,6 +37,7 @@ namespace Training_1
         {
             _scenario = scenario;
             _driver = new ChromeDriver();
+            _wait = new WebDriverWait(_driver, new TimeSpan(0, 0, 5));
             _homePage = new HomePageSteps(_driver, scenario);
             _logIn = new LogInSteps(_driver);
             _navbar = new NavbarSteps(_driver);
@@ -223,18 +225,7 @@ namespace Training_1
         [Then(@"I can see in the test output the mean value of each product")]
         public void ThenICanSeeInTheTestOutputTheMeanValueOfEachProduct()
         {
-            int noOfProducts;
-            int sum = 0;
-            int index = 1;
-
-            noOfProducts = _driver.FindElements(By.XPath("//*[contains(@class, 'col-lg-4 col-md-6 mb-4')]")).Count;
-            while (index <= noOfProducts)
-            {
-                sum += int.Parse(Regex.Match(_driver.FindElement(By.XPath("//*[@id=\"tbodyid\"]/div[" + index + "]/div/div/h5")).Text, @"\d+").Value);
-                index++;
-            }
-
-            _scenario.WriteLine("Sum is:\t" + sum + "\nNo Of Products:\t" + noOfProducts + "\n Mean VALUE:\t" + sum / noOfProducts);
+            _scenario.WriteLine(_homePage.CalculateMeanValue());
 
         }
 
@@ -242,8 +233,9 @@ namespace Training_1
         [Then(@"I see a different product")]
         public void ThenISeeADifferentProduct()
         {
-            Assert.NotEqual(_slide, _homePage.GetCurrentSliderImageText());
             _scenario.WriteLine(_slide + "  " + _homePage.GetCurrentSliderImageText());
+            Assert.NotEqual(_slide, _homePage.GetCurrentSliderImageText());
+            
 
         }
 
@@ -281,7 +273,6 @@ namespace Training_1
         [Then(@"I get the correct page/popup for that (.*)")]
         public void ThenIGetTheCorrectPagePopupForThat(string p0)
         {
-            Thread.Sleep(3000);
             switch (p0)
             {
                 case "Home":

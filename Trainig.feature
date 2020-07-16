@@ -12,7 +12,7 @@ Scenario: Register new user
 
 Scenario Outline: Get mean value product cost
 	Given I am on the homepage
-	When I filter by “<Product>”
+	When I filter by <Product>
 	Then I can see in the test output the mean value of each product
 
 	Examples:
@@ -23,7 +23,7 @@ Scenario Outline: Get mean value product cost
 
 Scenario: Check that Image Slider change the content
 	Given I am on the homepage
-	When Image Slider <Button> button is clicked
+	When Image Slider <Buttons> button is clicked
 	Then I see a different product
 
 	Examples:

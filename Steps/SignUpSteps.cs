@@ -16,7 +16,7 @@ namespace Training_1.Steps
         public SignUpSteps(IWebDriver driver)
         {
             _driver = driver;
-            _wait = new WebDriverWait(_driver, new TimeSpan(0, 0, 30));
+            _wait = new WebDriverWait(_driver, new TimeSpan(0, 0, 5));
             _popup = new PopUpSteps(_driver);
         }
 

@@ -15,7 +15,7 @@ namespace Training_1.Steps
         public PopUpSteps(IWebDriver driver)
         {
             _driver = driver;
-            _wait = new WebDriverWait(driver, new TimeSpan(0, 0, 30));
+            _wait = new WebDriverWait(driver, new TimeSpan(0, 0, 5));
         }
 
         public void PopUpAccept()

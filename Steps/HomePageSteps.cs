@@ -95,8 +95,8 @@ namespace Training_1.Steps
         {
             _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.ClassName("carousel-control-next-icon")));
             _noOfImageSlides = _driver.FindElements(By.XPath("//*[(@class='carousel-item')]")).Count;
-            _scenario.WriteLine(""+_noOfImageSlides);
-            return _driver.FindElement(By.XPath("//*[contains(@class,'carousel-item active')]")).GetProperty("firstElementChild.alt");
+            _scenario.WriteLine(""+ _driver.FindElement(By.XPath("//*[contains(@class,'carousel-item active')]/img")).GetAttribute("alt"));
+            return _driver.FindElement(By.XPath("//*[contains(@class,'carousel-item active')]/img")).GetAttribute("alt");
         }
 
         public void ClickSliderPrevious()
@@ -273,6 +273,24 @@ namespace Training_1.Steps
             return _driver.FindElements(By.ClassName("card-title")).ElementAt(index);
         }
 
+        public string CalculateMeanValue()
+        {
+            int noOfProducts;
+            int sum = 0;
+            int index = 0;
+            IWebElement currentProduct;
+
+            noOfProducts = GetTheNumberOfProducts();
+            while (index < noOfProducts)
+            {
+                currentProduct = GetProductSpecifiedByIndex(index);
+                sum += GetProductPrice(currentProduct);
+                index++;
+            }
+
+            return "Number of Products:" + noOfProducts + "\n Sum:" + sum + "\n Mean Value:" + sum / noOfProducts;
+
+        }
     }
 
 }

@@ -29,14 +29,15 @@ namespace Training_1.Steps
         {
             _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("//*[contains(@data-target,'exampleModal')]")));
             _driver.FindElement(By.XPath("//*[contains(@data-target,'exampleModal')]")).Click();
-            _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Id("logInModal"))).GetAttribute("ariaHidden").Equals(null);
+            _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.Id("exampleModalLabel")));
         }
 
         public void ClickAboutUs()
         {
-            _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("//*[contains(@data-target,'videoModal')]")));
-            _driver.FindElement(By.XPath("//*[contains(@data-target,'videoModal')]")).Click();
-            _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Id("videoModal"))).GetAttribute("ariaHidden").Equals(null);
+            _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("//*[contains(@data-target,'#videoModal')]")));
+            _driver.FindElement(By.XPath("//*[contains(@data-target,'#videoModal')]")).Click();
+            _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.Id("videoModalLabel")));
+
         }
 
         public void ClickCart()
@@ -50,7 +51,7 @@ namespace Training_1.Steps
         {
             _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.Id("login2")));
             _driver.FindElement(By.Id("login2")).Click();
-            _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Id("logInModal"))).GetAttribute("ariaHidden").Equals(null);
+            _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.Id("logInModal")));
         }
 
         public void ClickLogOut()
