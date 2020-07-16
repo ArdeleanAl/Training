@@ -32,7 +32,7 @@ namespace Training_1
         private ProductPageSteps _productPage;
         private PopUpSteps _popup;
         private CartPageSteps _cartPage;
-
+        private MiscFunctions _miscFunctions;
         public TrainingSteps(ITestOutputHelper scenario)
         {
             _scenario = scenario;
@@ -45,6 +45,7 @@ namespace Training_1
             _productPage = new ProductPageSteps(_driver);
             _popup = new PopUpSteps(_driver);
             _cartPage = new CartPageSteps(_driver);
+            _miscFunctions = new MiscFunctions();
         }
 
 
@@ -145,7 +146,7 @@ namespace Training_1
         [When(@"I fill in required data")]
         public void WhenIFillInRequiredData()
         {
-            _signUp.TypeUserName("AlexG");
+            _signUp.TypeUserName(_miscFunctions.GenerateRandomString(10));
             _signUp.TypeUserPassword("123456");
             _signUp.ClickOnModalSignUpButton();
         }
