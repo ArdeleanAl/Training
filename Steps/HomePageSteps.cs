@@ -34,7 +34,7 @@ namespace Training_1.Steps
         public void GoToHomePage()
         {
             _driver.Navigate().GoToUrl(Url);
-            _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Id("nava")));
+            _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Id("nava"))); ///blab alba lba 
         }
 
         public bool ImageSlideAvailable()
